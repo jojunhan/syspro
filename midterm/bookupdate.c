@@ -29,6 +29,16 @@ int main(int argc, char *argv[]){
 	do{
 		printf("0 bookId: borrow book, 1 bookId: return book ) ");
 		if(scanf("%d %d", &rec.numofborrow &id) == 1){
-			lseek(fd, (long) -sizeof(rec), SEEK_CUR);
-			write(fd, (char *) &rec, sizeof(rec));
-
+			lseek(fd, (long) (id-START_ID)*sizeof(rec), SEEK_SET);if ((read(fd, (char *) &record, sizeof(record)) > 0) && (record.id != 0)) {
+            scanf("%d", &record.numoborrow);
+            lseek(fd, (long) -sizeof(record), SEEK_CUR);
+            write(fd, (char *) &record, sizeof(record));
+			printf("%-3s %-10s %-10s %-5s %-11s %-7s\n", "id", "bookname", "author", "year", "numofborrow", "borrow");
+         } else printf("Record %d Null\n", id);
+      } else printf("Insert Error\n");
+      printf("Continue?(Y/N)");
+      scanf(" %c",&c);
+   } while (c == 'Y');
+   close(fd);
+   exit(0);
+}
