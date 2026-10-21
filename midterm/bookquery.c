@@ -30,12 +30,12 @@ int main(int argc, char *argv[]){
 	do{
 		printf("0: list of all books, 1: list of available books )");
 		scanf("%d", &id);
-			if(id == 0){
+		if(id == 0){
 			printf("%-3s %-10s %-10s %-5s %-11s %-7s\n", "id", "bookname", "author", "year", "numofborrow", "borrow");
-			while(fread(&rec, sizeof(rec), 1, fp) > 0)
-				if (rec.id != 0)
+			while(fread(&rec, sizeof(rec), 1, fp) > 0){
+				if (rec.id != 0){
 					printf("%3d %10s %10s %5d %11d %7d\n", rec.id, rec.bookname, rec.author, rec.year, rec.numOfBorrow, rec.borrow);
-			}
+				}}}
 			else if(id == 1){
 				lseek(fp, sizeof(rec), SEEK_END);
 				if(read(fd, (char *) &rec, sizeof(rec)) == 1){

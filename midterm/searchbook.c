@@ -30,12 +30,12 @@ int main(int argc, char *argv[]){
 	do{
 		printf("input name of book ) ");
 		if (scanf("%s", booknm) == 1){
-			lseek(fd, (booknm-START_BOOKNAME)*sizeof(record), SEEK_SET);
+			lseek(fd, 1L, SEEK_SET);
 			if((read(fd, (char *) &record, sizeof(record)) > 0) && (record.bookname != NULL)){
-					printf("%3s %10s %10s %5s %11s %7s", "id", "bookname", "author", "year", "numofborrow", "borrow");
-					printf("%3d %10s %10s %5d %11d %7d", record.id, record.bookname, record.author, record.year, record.numOfBorrow, record.borrow);
+					printf("%3s %10s %10s %5s %11s %7s\n", "id", "bookname", "author", "year", "numofborrow", "borrow");
+					printf("%3d %10s %10s %5d %11d %7d\n\n", record.id, record.bookname, record.author, record.year, record.numOfBorrow, record.borrow);
 					}
-			
+			else printf("Record %s Null\n", booknm);
 		} else printf("Input Error");
 		printf("Continue?(Y/N)");
 		scanf(" %c", &c);
